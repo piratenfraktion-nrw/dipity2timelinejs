@@ -24,7 +24,8 @@ var input = fs.readFile(infile, function(err,data) {
   output.timeline = {};
   output.timeline.headline = input.timelines[Object.keys(input.timelines)[0]].title;
   output.timeline.type = "default";
-  output.timeline.text = input.timelines[Object.keys(input.timelines)[0]].descrptn;
+  output.timeline.text =
+    input.timelines[Object.keys(input.timelines)[0]].descrptn.split("\n\n").join("</p><p>");
   output.timeline.asset = {};
   output.timeline.asset.media = input.timelines[Object.keys(input.timelines)[0]].image;
   output.timeline.asset.credit = "insert timeline credit here";
@@ -41,7 +42,7 @@ var input = fs.readFile(infile, function(err,data) {
 	  (item.second ? "," + item.minute + "," + item.second : "") : "");
     date.endDate = date.startDate; // does dipity have end times?
     date.headline = item.title;
-    date.text = item.descrptn;
+    date.text = item.descrptn.split("\n\n").join("</p><p>");
     date.asset = {};
     date.asset.media = item.link;
     date.asset.thumbnail = item.img_url;
